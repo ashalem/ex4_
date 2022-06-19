@@ -25,8 +25,6 @@ public:
     Dragon(const Dragon&) = default;
     ~Dragon() = default;
     Dragon& operator=(const Dragon& other) = default;
-
-private:
     void handleLoss(Player &player) const override;
 };
 

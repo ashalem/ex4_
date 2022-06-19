@@ -2,6 +2,7 @@
 #define MTMCHKIN_H_
 
 #include <queue>
+#include <memory>
 
 #include "Cards/Card.h"
 #include "Players/Player.h"
@@ -53,8 +54,11 @@ public:
     int getNumberOfRounds() const;
 
 private:
-    std::queue<Card> deck;
-    std::queue<Player> players;
+    std::queue<std::shared_ptr<Card>> deck;
+    std::queue<std::unique_ptr<Player>> players;
+
+    void initializeDeckList(const std::string fileName);
+    void addNewCard(const std::string cardName, std::ifstream &deckFile);
 };
 
 

@@ -38,13 +38,12 @@ public:
     int getForce() const;
     int getDamage() const;
     int getLoot() const;
+    virtual void handleLoss(Player &player) const = 0;
 
 private:
     int m_force;
     int m_damage;
     int m_loot;
-
-    virtual void handleLoss(Player &player) const = 0;
 };
 
 
