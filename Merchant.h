@@ -34,60 +34,61 @@ public:
     Merchant(const Merchant&) = default;
     virtual ~Merchant() = default;
     Merchant& operator=(const Merchant& other) = default;
-
+    
 private:
     enum class ActionEnum {Nothing = 0, HealthBoost, ForceBoost};
     class Action;
-    class NoAction: public Action;
-    class HealthPotion: public Action;
-    class ForceBoost: public Action;
-
+    class NoAction;
+    class HealthPotion;
+    class ForceBoost;
     static std::unique_ptr<Merchant::Action> getUserAction();
 };
 
 class Merchant::Action {
 public:
-    Action(int cost);
-    virtual coid doBenefit(Player &player) const  = 0;
+    Action(int cost, Merchant::ActionEnum typeEnum);
+    virtual void doBenefit(Player &player) const  = 0;
+    Merchant::ActionEnum getTypeEnum() const;
 
     virtual ~Action() = default;
     Action(const Action&) = default;
-    operator=(const Action&) = default;
+    Action& operator=(const Action&) = default;
 
     int getCost() const;
 private:
     int m_cost;
-}
+    Merchant::ActionEnum m_typeEnum;
+};
 
 class Merchant::NoAction : public Merchant::Action {
 public:
-    HealthPotion();
+    NoAction();
     void doBenefit(Player &player) const override;
 
-    virtual ~NoAction() = default;
+    ~NoAction() = default;
     NoAction(const NoAction&) = default;
-    operator=(const NoAction&) = default;
-}
+    NoAction& operator=(const NoAction&) = default;
+};
 
 class Merchant::HealthPotion : public Merchant::Action {
 public:
     HealthPotion();
     void doBenefit(Player &player) const override;
 
-    virtual ~HealthPotion() = default;
+     ~HealthPotion() = default;
     HealthPotion(const HealthPotion&) = default;
-    operator=(const HealthPotion&) = default;
-}
+    HealthPotion& operator=(const HealthPotion&) = default;
+};
 
 class Merchant::ForceBoost : public Merchant::Action {
 public:
     ForceBoost();
     void doBenefit(Player &player) const override;
 
-    virtual ~ForceBoost() = default;
+    ~ForceBoost() = default;
     ForceBoost(const ForceBoost&) = default;
-    operator=(const ForceBoost&) = default;
-}
+    ForceBoost&  operator=(const ForceBoost&) = default;
+};
 
 
 #endif //EX4_Merchant_H
