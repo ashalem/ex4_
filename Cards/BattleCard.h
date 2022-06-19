@@ -4,9 +4,8 @@
 #include <string>
 #include <iostream>
 
-#include "Player.h"
+#include "../Players/Player.h"
 #include "Card.h"
-#include "utilities.h"
 
 class BattleCard : public Card{
 public:

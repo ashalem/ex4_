@@ -1,11 +1,10 @@
-MTM_HEADERS=/home/mtm/public/2122b/ex4_
 CC=g++
 PLAYERS_OBJS = Players/Player.o Players/Fighter.o Players/Wizard.o Players/Rogue.o 
 CARDS_OBJS = Cards/Card.o Cards/BattleCard.o Cards/Fairy.o Cards/Pitfall.o Cards/Barfight.o Cards/Dragon.o Cards/Vampire.o Cards/Goblin.o Cards/Treasure.o Cards/Merchant.o  
 OBJS=utilities.o $(PLAYERS_OBJS) $(CARDS_OBJS)
 EXEC=eden_test
 DEBUG_FLAG= -g
-CPPFLAGS=--std=c++11 -Wall -pedantic-errors -Werror -I. -IPlayers -ICards -I$(MTM_HEADERS) -DNDEBUG -g
+CPPFLAGS=--std=c++11 -Wall -pedantic-errors -Werror  -DNDEBUG -g
 
 $(EXEC) : $(OBJS)
 	$(CC) $(DEBUG_FLAG) $(CPPFLAGS) $(OBJS) -o $@

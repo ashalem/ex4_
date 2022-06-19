@@ -5,9 +5,9 @@
 #include <string>
 #include <iostream>
 
-#include "Player.h"
+#include "../Players/Player.h"
 #include "Card.h"
-#include "utilities.h"
+#include "../utilities.h"
 
 class Fairy : public Card{
 public:

@@ -1,8 +1,8 @@
 #include <string>
 #include <iostream>
 
-#include "utilities.h"
-#include "Player.h"
+#include "../utilities.h"
+#include "../Players/Player.h"
 #include "Card.h"
 
 Card::Card(std::string name) : m_name(name) {}

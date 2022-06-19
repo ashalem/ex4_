@@ -5,9 +5,9 @@
 #include <iostream>
 #include <memory>
 
-#include "Player.h"
+#include "../Players/Player.h"
 #include "Card.h"
-#include "utilities.h"
+#include "../utilities.h"
 
 class Merchant : public Card{
 public:

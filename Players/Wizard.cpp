@@ -2,7 +2,7 @@
 #include <string>
 
 #include "Wizard.h"
-#include "utilities.h"
+#include "../utilities.h"
 #include "Player.h"
 
 Wizard::Wizard(std::string name, std::string className) : Player(name), m_class(className) {}

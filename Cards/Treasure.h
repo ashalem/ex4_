@@ -7,9 +7,8 @@
 #include <string>
 #include <iostream>
 
-#include "Player.h"
+#include "../Players/Player.h"
 #include "Card.h"
-#include "utilities.h"
 
 class Treasure : public Card{
 public:

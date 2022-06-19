@@ -5,7 +5,6 @@
 #include <iostream>
 
 #include "Player.h"
-#include "utilities.h"
 
 
 class Fighter : public Player {

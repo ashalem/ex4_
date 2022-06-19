@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 
-#include "utilities.h"
 #include "BattleCard.h"
 #include "Vampire.h"
 

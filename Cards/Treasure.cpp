@@ -1,7 +1,7 @@
 #include <string>
 
-#include "utilities.h"
-#include "Player.h"
+#include "../utilities.h"
+#include "../Players/Player.h"
 #include "Card.h"
 #include "Treasure.h"
 

@@ -2,7 +2,7 @@
 #include <string>
 
 #include "Fighter.h"
-#include "utilities.h"
+#include "../utilities.h"
 #include "Player.h"
 
 Fighter::Fighter(std::string name, std::string className) : Player(name), m_class(className) {}

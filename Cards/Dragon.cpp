@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-#include "utilities.h"
+#include "../utilities.h"
 #include "BattleCard.h"
 #include "Dragon.h"
 

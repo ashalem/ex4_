@@ -1,8 +1,8 @@
 #include <string>
 #include <memory>
 
-#include "utilities.h"
-#include "Player.h"
+#include "../utilities.h"
+#include "../Players/Player.h"
 #include "Card.h"
 #include "Merchant.h"
 

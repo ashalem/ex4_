@@ -2,7 +2,7 @@
 #include <string>
 
 #include "Rogue.h"
-#include "utilities.h"
+#include "../utilities.h"
 #include "Player.h"
 
 Rogue::Rogue(std::string name, std::string className) : Player(name), m_class(className) {}
