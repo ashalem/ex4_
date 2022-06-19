@@ -7,11 +7,11 @@
 
 Card::Card(std::string name) : m_name(name) {}
 
-std::string BattleCard::getName() const {
+std::string Card::getName() const {
     return this->m_name;
 }
 
-void Merchant::printDetails(std::ostream& os) const {
+void Card::printDetails(std::ostream& os) const{
     printCardDetails(os, getName());
 }
 

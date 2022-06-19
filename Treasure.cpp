@@ -3,7 +3,7 @@
 #include "utilities.h"
 #include "Player.h"
 #include "Card.h"
-#iclude "Treasure.h"
+#include "Treasure.h"
 
 Treasure::Treasure() : Card("Treasure") {}
 

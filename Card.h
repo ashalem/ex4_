@@ -34,7 +34,7 @@ public:
      * @return
      *      string - the card's info
     */
-    virtual void printDetails(std::ostream& os);
+    virtual void printDetails(std::ostream& os) const;
 
     /*
      * Here we are explicitly telling the compiler to use the default methods
