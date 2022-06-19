@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "Player.h"
-#include "Exception.h"
+#include "../Exception.h"
 
 bool Player::isValidName(std::string name){
 

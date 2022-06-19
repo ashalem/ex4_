@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 
-#include "Exception.h"
+#include "../Exception.h"
 
 
 class Player {

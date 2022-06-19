@@ -4,7 +4,7 @@
 #include "../utilities.h"
 #include "../Players/Player.h"
 #include "Card.h"
-#include "Exception.h"
+#include "../Exception.h"
 
 
 bool Card::isValidName(std::string name){

@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "../Players/Player.h"
-#include "Exception.h"
+#include "../Exception.h"
 
 class Card {
 public:
