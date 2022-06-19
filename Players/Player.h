@@ -5,6 +5,8 @@
 #include <string>
 #include <iostream>
 
+#include "Exception.h"
+
 
 class Player {
 public:
@@ -163,6 +165,13 @@ public:
     
 
 private:
+
+    /*
+     * @return
+     *      bool - if the inserted name is valid or not (according to the requirments). 
+    */
+    static bool isValidName(std::string);
+
     static const int maxLevel = 10;
     static const int startingLevel = 1;
     static const int startingCoins = 10;

@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "../Players/Player.h"
+#include "Exception.h"
 
 class Card {
 public:
@@ -43,16 +44,23 @@ public:
     Card& operator=(const Card& other) = default;
 
     /*
-     *  outputStream (<<) operator printing instances of HealthPoints objects.
+     *  outputStream (<<) operator printing instances of Card objects.
      *
      *  @return
-     *          ostream object and prints the HealthPoints object in the right format.
+     *          ostream object and prints the Card object in the right format.
      */
     friend std::ostream& operator<<(std::ostream& os, const Card& card);
 
     std::string getName() const;
 
 private:
+
+    /*
+     * @return
+     *      bool - if the inserted name is valid or not (according to the requirments). 
+    */
+    static bool isValidName(std::string); 
+
     std::string m_name;
 };
 

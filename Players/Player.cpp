@@ -1,9 +1,27 @@
 
 
 #include <stdbool.h>
-#include <assert.h>
+#include <string>
+#include <iostream>
 
 #include "Player.h"
+#include "Exception.h"
+
+bool Player::isValidName(std::string name){
+
+    int name_length = name.length();
+    if(name_length > 15){
+        return 0;
+    }
+
+    for (int chr = 0; chr < name_length; chr++){
+        if(!std::isalpha(name[chr])){
+            return 0;
+        }
+    }
+
+    return 1;
+}
 
 Player::Player(std::string name) :
     m_name(name),
@@ -12,6 +30,10 @@ Player::Player(std::string name) :
     m_HP(defaultMaxHp),
     m_level(startingLevel),
     m_coins(startingCoins) {
+
+        if(!(isValidName(name))){
+            throw InvalidNameInput(std::string("Invalid name input of the player."));
+        }
     }
 
 void Player::levelUp() {
