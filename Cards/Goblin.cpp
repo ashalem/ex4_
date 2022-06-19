@@ -5,4 +5,4 @@
 #include "BattleCard.h"
 #include "Goblin.h"
 
-Goblin::Goblin(): BattleCard(6, 10, 2, "Goblin") {}
+Goblin::Goblin() : BattleCard(6, 10, 2, "Goblin") {}

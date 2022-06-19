@@ -23,7 +23,7 @@ public:
      * Here we are explicitly telling the compiler to use the default methods
     */
     Goblin(const Goblin&) = default;
-    virtual ~Goblin() = default;
+    ~Goblin() = default;
     Goblin& operator=(const Goblin& other) = default;
 
 private:

@@ -6,7 +6,7 @@
 #include "BattleCard.h"
 #include "Dragon.h"
 
-Dragon::Dragon(): BattleCard(25, 0, 1000, "Dragon") {}
+Dragon::Dragon() : BattleCard(25, 0, 1000, "Dragon") {}
 
 
 void Dragon::handleLoss(Player &player) const {

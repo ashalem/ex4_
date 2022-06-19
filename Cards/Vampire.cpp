@@ -6,7 +6,7 @@
 #include "BattleCard.h"
 #include "Vampire.h"
 
-Vampire::Vampire(): BattleCard(10, 10, 2, "Vampire") {}
+Vampire::Vampire() : BattleCard(10, 10, 2, "Vampire") {}
 
 
 void Vampire::handleLoss(Player &player) const {

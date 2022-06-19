@@ -7,19 +7,19 @@
 #include "BattleCard.h"
 
 BattleCard::BattleCard(int force, int damage, int loot, const std::string &name) :
-    Card(name), m_force(force), m_damage(damage), m_loot(loot), {}
+    Card(name), m_force(force), m_damage(damage), m_loot(loot) {}
 
 void BattleCard::applyEncounter(Player &player) const  {
-    bool hasWonBattle = (player.getAttackStrength() >= this->force); // TODO: Change
+    bool hasWonBattle = (player.getAttackStrength() >= this->m_force);
 
     if (hasWonBattle) {
-        printWinBattle(player.name, getName());
+        printWinBattle(player.getName(), getName());
         player.levelUp();
         player.addCoins(getLoot());
     } else {
-        printLossBattle(player.name, getName());
-        player.damage(getDamage())
-        this->handleLoss(player);
+        printLossBattle(player.getName(), getName());
+        player.damage(getDamage());
+        handleLoss(player);
     }
 }
 

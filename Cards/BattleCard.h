@@ -31,7 +31,7 @@ public:
      * Here we are explicitly telling the compiler to use the default methods
     */
     BattleCard(const BattleCard&) = default;
-    virtual ~BattleCard() = default;
+    ~BattleCard() = default;
     BattleCard& operator=(const BattleCard& other) = default;
 
     void printDetails(std::ostream& os) const override;

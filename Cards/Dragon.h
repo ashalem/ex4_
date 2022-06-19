@@ -23,7 +23,7 @@ public:
      * Here we are explicitly telling the compiler to use the default methods
     */
     Dragon(const Dragon&) = default;
-    virtual ~Dragon() = default;
+    ~Dragon() = default;
     Dragon& operator=(const Dragon& other) = default;
 
 private:

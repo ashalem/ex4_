@@ -128,7 +128,11 @@ public:
     */
     virtual std::string getClass() const = 0;
 
-protected:
+    /*
+     * @return
+     *      int - the player's Name
+    */
+    std::string getName() const;
 
     /*
      * Gets the player info
@@ -137,12 +141,6 @@ protected:
      *      string - the player's info
     */
     virtual void printClassPlayerDetails(std::ostream& os) const = 0;
-
-    /*
-     * @return
-     *      int - the player's Name
-    */
-    std::string getPlayerName() const;
 
     /*
      * @return
@@ -160,13 +158,7 @@ protected:
      * @return
      *      int - the player's current force
     */
-    int getPlayerForce() const;
-
-    /*
-     * @return
-     *      int - the player's current level
-    */
-    int getPlayerLevel() const;
+    int getForce() const;
 
     
 

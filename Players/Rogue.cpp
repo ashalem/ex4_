@@ -17,5 +17,5 @@ std::string Rogue::getClass() const {
 }
 
 void Rogue::printClassPlayerDetails(std::ostream& os) const {
-    printPlayerDetails(os, getPlayerName(), this->m_class, getLevel(), getPlayerForce(), getHp(), getCoins());
+    printPlayerDetails(os, getName(), this->m_class, getLevel(), getForce(), getHp(), getCoins());
 }

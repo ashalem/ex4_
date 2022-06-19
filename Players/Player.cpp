@@ -101,7 +101,7 @@ std::ostream& operator<<(std::ostream& os, const Player& player) {
     return os;
 }
 
-std::string Player::getPlayerName() const {
+std::string Player::getName() const {
     return this-> m_name;
 }
 
@@ -113,10 +113,6 @@ int Player::getCoins() const {
     return this->m_coins;
 }
 
-int Player::getPlayerForce() const {
+int Player::getForce() const {
     return this->m_force;
-}
-
-int Player::getPlayerLevel() const {
-    return this->m_level;
 }

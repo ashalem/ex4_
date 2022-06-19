@@ -8,7 +8,7 @@
 Fighter::Fighter(std::string name, std::string className) : Player(name), m_class(className) {}
 
 int Fighter::getAttackStrength() const {
-    return (getPlayerForce() * 2) + getLevel();
+    return (getForce() * 2) + getLevel();
 }
 
 std::string Fighter::getClass() const {
@@ -16,5 +16,5 @@ std::string Fighter::getClass() const {
 }
 
 void Fighter::printClassPlayerDetails(std::ostream& os) const {
-    printPlayerDetails(os, getPlayerName(), this->m_class, getLevel(), getPlayerForce(), getHp(), getCoins());
+    printPlayerDetails(os, getName(), this->m_class, getLevel(), getForce(), getHp(), getCoins());
 }
