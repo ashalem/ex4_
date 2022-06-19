@@ -9,6 +9,6 @@
 Vampire::Vampire(): BattleCard(10, 10, 2, "Vampire") {}
 
 
-void handleLoss(Player &player) const {
-    player.debuf(1);
+void Vampire::handleLoss(Player &player) const {
+    player.debuff(1);
 }

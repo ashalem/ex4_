@@ -9,7 +9,7 @@ Player::Player(std::string name) :
     m_name(name),
     m_maxHp(defaultMaxHp),
     m_force(defaultForce),
-    m_HP(maxHp),
+    m_HP(defaultMaxHp),
     m_level(startingLevel),
     m_coins(startingCoins) {
     }
@@ -32,6 +32,15 @@ void Player::buff(const int buffPoints) {
     this->m_force += buffPoints;
 }
 
+void Player::debuff(const int buffPoints) {
+    //assert(buffPoints > 0);
+    if (buffPoints <= 0) {
+        return;
+    }
+    this->m_force -= buffPoints;
+    this->m_force = this->m_force > 0? this->m_force : 0;
+}
+
 void Player::heal(const int healPoints) {
     //assert(healPoints > 0);
     if (healPoints <= 0) {
@@ -50,6 +59,10 @@ void Player::damage(const int damagePoints) {
 
     this->m_HP -= damagePoints;
     this->m_HP = this->m_HP > 0 ? this->m_HP : 0;
+}
+
+void Player::knockOut() {
+    this->m_HP = 0;
 }
 
 bool Player::isKnockedOut() const {
@@ -84,13 +97,14 @@ int Player::getAttackStrength() const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Player& player) {
-    card.printClassPlayerDetails(os);
+    player.printClassPlayerDetails(os);
     return os;
 }
 
 std::string Player::getPlayerName() const {
     return this-> m_name;
 }
+
 int Player::getHp() const {
     return this->m_HP;
 }

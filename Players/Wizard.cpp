@@ -5,7 +5,7 @@
 #include "utilities.h"
 #include "Player.h"
 
-Wizard::Wizard(std::string name, std::string className) : Player(name), m_class(className) {};
+Wizard::Wizard(std::string name, std::string className) : Player(name), m_class(className) {}
 
 void Wizard::heal(const int healPoints) {
     int doubleHealPoints = healPoints * 2;

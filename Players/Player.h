@@ -5,8 +5,6 @@
 #include <string>
 #include <iostream>
 
-#include "utilities.h"
-
 
 class Player {
 public:
@@ -46,6 +44,14 @@ public:
     void buff(const int buffPoints);
 
     /*
+     * Decrease player force
+     *
+     * @return
+     *      void
+    */
+    void debuff(const int debuffPoints);
+
+    /*
      * Increase player current hp
      *
      * @return
@@ -60,6 +66,14 @@ public:
      *      void
     */
     void damage(const int damagePoints);
+
+    /*
+     * Decrease player current hp to zero
+     *
+     * @return
+     *      void
+    */
+    void knockOut();
 
     /*
      * Checks if Player's life reached zero

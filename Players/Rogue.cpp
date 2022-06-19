@@ -5,7 +5,7 @@
 #include "utilities.h"
 #include "Player.h"
 
-Rogue::Rogue(std::string name, std::string className) : Player(name), m_class(className) {};
+Rogue::Rogue(std::string name, std::string className) : Player(name), m_class(className) {}
 
 void Rogue::addCoins(const int coinsToAdd) {
     int doubleCoins = coinsToAdd * 2;

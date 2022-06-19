@@ -5,10 +5,10 @@
 #include "utilities.h"
 #include "Player.h"
 
-Fighter::Fighter(std::string name, std::string className) : Player(name), m_class(className) {};
+Fighter::Fighter(std::string name, std::string className) : Player(name), m_class(className) {}
 
-void Fighter::getAttackStrength() const {
-    return (getForce() * 2) + getLevel();
+int Fighter::getAttackStrength() const {
+    return (getPlayerForce() * 2) + getLevel();
 }
 
 std::string Fighter::getClass() const {
