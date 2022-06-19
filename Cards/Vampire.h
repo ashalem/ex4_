@@ -25,8 +25,6 @@ public:
     Vampire(const Vampire&) = default;
     ~Vampire() = default;
     Vampire& operator=(const Vampire& other) = default;
-
-private:
     void handleLoss(Player &player) const override;
 };
 

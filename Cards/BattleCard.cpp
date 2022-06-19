@@ -10,9 +10,7 @@ BattleCard::BattleCard(int force, int damage, int loot, const std::string &name)
     Card(name), m_force(force), m_damage(damage), m_loot(loot) {}
 
 void BattleCard::applyEncounter(Player &player) const  {
-    bool hasWonBattle = (player.getAttackStrength() >= this->m_force);
-
-    if (hasWonBattle) {
+    if (player.getAttackStrength() >= this->m_force) {
         printWinBattle(player.getName(), getName());
         player.levelUp();
         player.addCoins(getLoot());
