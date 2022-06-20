@@ -59,7 +59,7 @@ private:
      * @return
      *      bool - if the inserted name is valid or not (according to the requirments). 
     */
-    static bool isValidName(std::string); 
+    static bool isValidName(const std::string& name);
 
     std::string m_name;
 };

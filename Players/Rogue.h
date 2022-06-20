@@ -19,7 +19,7 @@ public:
      * @return
      *      A new instance of Rogue.
     */
-    Rogue(std::string name, std::string className);
+    Rogue(std::string name);
     
     /*
      * Increase Rogue coins

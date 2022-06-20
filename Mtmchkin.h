@@ -55,10 +55,16 @@ public:
 
 private:
     std::queue<std::shared_ptr<Card>> deck;
-    std::queue<std::unique_ptr<Player>> players;
+    std::vector<std::shared_ptr<Player>> players;
+    int m_numRounds;
 
     void initializeDeckList(const std::string fileName);
     void addNewCard(const std::string cardName, std::ifstream &deckFile);
+    void initializePlayerQueue();
+    int getNumOfPlayers() const;
+    void getPlayerNameAndClass();
+    static bool isValidName(const std::string& name);
+    bool didCreateClass(const std::string& playerClass, const std::string& name);
 };
 
 

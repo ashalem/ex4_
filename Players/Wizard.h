@@ -19,7 +19,7 @@ public:
      * @return
      *      A new instance of Wizard.
     */
-    Wizard(std::string name, std::string className);
+    Wizard(std::string name);
     
     /*
      * Increase Wizard current hp

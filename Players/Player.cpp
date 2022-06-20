@@ -7,7 +7,7 @@
 #include "Player.h"
 #include "../Exception.h"
 
-bool Player::isValidName(std::string name){
+bool Player::isValidName(const std::string& name){
 
     int name_length = name.length();
     if(name_length > 15){

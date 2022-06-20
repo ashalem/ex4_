@@ -5,7 +5,7 @@
 #include "../utilities.h"
 #include "Player.h"
 
-Fighter::Fighter(std::string name, std::string className) : Player(name), m_class(className) {}
+Fighter::Fighter(std::string name) : Player(name), m_class("Fighter") {}
 
 int Fighter::getAttackStrength() const {
     return (getForce() * 2) + getLevel();

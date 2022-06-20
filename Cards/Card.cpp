@@ -7,7 +7,7 @@
 #include "../Exception.h"
 
 
-bool Card::isValidName(std::string name){
+bool Card::isValidName(const std::string& name){
     
     int name_length = name.length();
     if(name_length > 15){

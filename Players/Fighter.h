@@ -19,7 +19,7 @@ public:
      * @return
      *      A new instance of Fighter.
     */
-    Fighter(std::string name, std::string className);
+    Fighter(std::string name);
     
     /*
      * Returns player overall strength
