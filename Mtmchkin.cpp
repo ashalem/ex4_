@@ -34,6 +34,7 @@ std::shared_ptr<Gang> Mtmchkin::parseGangStream(std::ifstream &deckFile, int &li
         aGang->addMonster(monsterName);
     }
 
+    ////std::cout << "In gang error" << std::endl;
     throw DeckFileFormatError(lineNum);
 }
 
@@ -43,6 +44,7 @@ void Mtmchkin::addNewCard(const std::string cardName, std::ifstream &deckFile, i
     } else if ("Vampire" == cardName) {
         deck.push(std::shared_ptr<Vampire>(new Vampire()));
     } else if ("Goblin" == cardName) {
+        ////std::cout << "gg" << std::endl;
         deck.push(std::shared_ptr<Goblin>(new Goblin()));
     } else if ("Merchant" == cardName) {
         deck.push(std::shared_ptr<Merchant>(new Merchant()));
@@ -57,6 +59,7 @@ void Mtmchkin::addNewCard(const std::string cardName, std::ifstream &deckFile, i
     } else if ("Gang" == cardName) {
         deck.push(parseGangStream(deckFile, lineNum));
     } else {
+        ////std::cout << "card name " << cardName << std::endl;
         throw DeckFileFormatError(lineNum);
     }
 }
@@ -64,7 +67,6 @@ void Mtmchkin::addNewCard(const std::string cardName, std::ifstream &deckFile, i
 void Mtmchkin::initializeDeckList(const std::string fileName) {
     std::ifstream deckFile(fileName);
     if (!deckFile) {
-        std::cerr << "Received invalid deck file: " << fileName << std::endl;
         throw DeckFileNotFound();
     }
 
@@ -98,7 +100,7 @@ int Mtmchkin::getNumOfPlayers() const{
         try {
             playerChoice = std::stoi(userInput.c_str());
         } catch (std::invalid_argument) {
-            std::cout << "Invalid team input! Please enter an integer." << std::endl;
+            //TODO //std::cout << "Invalid team input! Please enter an integer." << std::endl;
             continue;
         }
         if(playerChoice >= 2 && playerChoice <= 6){
@@ -153,12 +155,16 @@ void Mtmchkin::getPlayerNameAndClass() {
         std::getline(std::cin, playerInput);
         firstSpace = playerInput.find(' ');
         playerName = playerInput.substr(0, firstSpace);
+        //std::cout << "received: " << playerInput << " to: " << playerName;
         if(!isValidName(playerName)){
+            //std::cout << "invalid name" << std::endl;
             printInvalidName();
             continue;
         }
         playerClass = playerInput.substr(firstSpace+1);
+        //std::cout << "class: " << playerClass << std::endl;
         if(!didCreateClass(playerClass, playerName)){
+            //std::cout << "invalid class" << std::endl;
             printInvalidClass();
             continue;
         }
@@ -186,9 +192,9 @@ void Mtmchkin::updatePlayersLists(std::shared_ptr<Player>& player) {
 void Mtmchkin::playRound() {
     this->m_numRounds++;
     printRoundStartMessage(this->m_numRounds);
-    //std::cout << "Players num: " << this->players.size() << "Deck size: " << this->deck.size() << std::endl;
+    ////std::cout << "Players num: " << this->players.size() << "Deck size: " << this->deck.size() << std::endl;
     for (std::shared_ptr<Player>& currentPlayer: players) {
-        //std::cout << "in player: " << currentPlayer->getName();
+        ////std::cout << "in player: " << currentPlayer->getName();
         if(!currentPlayer->isPlaying()){
             continue;
         }
@@ -233,3 +239,4 @@ bool Mtmchkin::isGameOver() const {
 int Mtmchkin::getNumberOfRounds() const {
     return this->m_numRounds;
 }
+ 

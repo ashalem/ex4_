@@ -3,34 +3,38 @@
 #include <stdexcept>
 #include <string>
 
-class InvalidNameInput : public std::runtime_error {
+class MtmchinException : public std::runtime_error {
 public:
-    InvalidNameInput(const std::string& what): std::runtime_error(what) {}
-
+    MtmchinException(const std::string& what): std::runtime_error(what) {}
 };
 
-class DeckFileNotFound : public std::runtime_error {
+class InvalidNameInput : public MtmchinException {
+public:
+    InvalidNameInput(const std::string& what): MtmchinException(what) {}
+};
+
+class DeckFileNotFound : public MtmchinException {
 public:
     DeckFileNotFound():
-     std::runtime_error("Deck File Error: File not found") {} 
+     MtmchinException("Deck File Error: File not found") {} 
 };
 
-class DeckFileFormatError : public std::runtime_error {
+class DeckFileFormatError : public MtmchinException {
 public:
     DeckFileFormatError(int lineNum):
-     std::runtime_error("Deck File Error: File format error in line " + std::to_string(lineNum)) {} 
+     MtmchinException("Deck File Error: File format error in line " + std::to_string(lineNum)) {} 
 };
 
-class DeckFileInvalidSize : public std::runtime_error {
+class DeckFileInvalidSize : public MtmchinException {
 public:
     DeckFileInvalidSize():
-     std::runtime_error("Deck File Error: Deck size is invalid") {} 
+     MtmchinException("Deck File Error: Deck size is invalid") {} 
 };
 
-class InvalidMonsterName : public std::runtime_error {
+class InvalidMonsterName : public MtmchinException {
 public:
     InvalidMonsterName(const std::string& cardName):
-     std::runtime_error("Invalid monster name: " + cardName) {} 
+     MtmchinException("Invalid monster name: " + cardName) {} 
 };
 
 #endif //EX4_Exceptions_H
