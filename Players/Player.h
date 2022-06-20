@@ -85,6 +85,23 @@ public:
     */
     bool isKnockedOut() const;
 
+    
+    /*
+     * Checks if Player already Won
+     *
+     * @return
+     *      bool 
+    */
+    bool hasWon() const;
+
+    /*
+     * Checks if Player is playing
+     *
+     * @return
+     *      bool 
+    */
+    bool isPlaying() const;
+
     /*
      * Increase player coins
      *

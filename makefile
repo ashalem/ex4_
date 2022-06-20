@@ -1,7 +1,7 @@
 CC=g++
 PLAYERS_OBJS = Players/Player.o Players/Fighter.o Players/Wizard.o Players/Rogue.o 
 CARDS_OBJS = Cards/Card.o Cards/BattleCard.o Cards/Fairy.o Cards/Pitfall.o Cards/Barfight.o Cards/Dragon.o Cards/Vampire.o Cards/Goblin.o Cards/Gang.o Cards/Treasure.o Cards/Merchant.o  
-OBJS=utilities.o $(PLAYERS_OBJS) $(CARDS_OBJS)
+OBJS= test.o Mtmchkin.o utilities.o $(PLAYERS_OBJS) $(CARDS_OBJS)
 EXEC=eden_test
 DEBUG_FLAG= -g
 CPPFLAGS=--std=c++11 -Wall -pedantic-errors -Werror  -DNDEBUG -g
@@ -24,6 +24,8 @@ Cards/Pitfall.o: Cards/Pitfall.cpp Cards/Pitfall.h Cards/Card.h Players/Player.h
 Players/Fighter.o: Players/Fighter.cpp Players/Fighter.h Players/Player.h utilities.h
 Players/Rogue.o: Players/Rogue.cpp Players/Rogue.h Players/Player.h utilities.h
 Players/Wizard.o: Players/Wizard.cpp Players/Wizard.h Players/Player.h utilities.h
+Mtmchkin.o: Mtmchkin.cpp  Mtmchkin.h
+test.o: test.cpp
 
 clean:
 	rm -f $(OBJS) $(EXEC)

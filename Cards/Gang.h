@@ -32,8 +32,6 @@ public:
 
     void addMonster(const std::string &monsterName);
 
-    void parseFromStream(std::ifstream &fileStream);
-
     /*
      * Here we are explicitly telling the compiler to use the default methods
     */

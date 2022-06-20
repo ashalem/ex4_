@@ -40,20 +40,14 @@ void Gang::applyEncounter(Player &player) const  {
 
 void Gang::addMonster(const std::string &monsterName) {
     if ("Dragon" == monsterName) {
-        monsters.push_back(std::unique_ptr<Dragon>());
+        monsters.push_back(std::unique_ptr<Dragon>(new Dragon()));
     } else if ("Vampire" == monsterName) {
-        monsters.push_back(std::unique_ptr<Vampire>());
+        monsters.push_back(std::unique_ptr<Vampire>(new Vampire()));
     } else if ("Goblin" == monsterName) {
-        monsters.push_back(std::unique_ptr<Goblin>());
+        monsters.push_back(std::unique_ptr<Goblin>(new Goblin()));
     } else {
         throw InvalidMonsterName(monsterName);
     }
 }
 
-void Gang::parseFromStream(std::ifstream &fileStream) {
-    std::string monsterName;
-    while (std::getline(fileStream, monsterName)) {
-        addMonster(monsterName);
-    }
-}
 

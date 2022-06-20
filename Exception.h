@@ -9,16 +9,22 @@ public:
 
 };
 
-class InvalidDeckFile : public std::runtime_error {
+class DeckFileNotFound : public std::runtime_error {
 public:
-    InvalidDeckFile(const std::string& deckName):
-     std::runtime_error("Invalid deck file name: " + deckName) {} 
+    DeckFileNotFound():
+     std::runtime_error("Deck File Error: File not found") {} 
 };
 
-class InvalidCardName : public std::runtime_error {
+class DeckFileFormatError : public std::runtime_error {
 public:
-    InvalidCardName(const std::string& cardName):
-     std::runtime_error("Invalid card name: " + cardName) {} 
+    DeckFileFormatError(int lineNum):
+     std::runtime_error("Deck File Error: File format error in line " + std::to_string(lineNum)) {} 
+};
+
+class DeckFileInvalidSize : public std::runtime_error {
+public:
+    DeckFileInvalidSize():
+     std::runtime_error("Deck File Error: Deck size is invalid") {} 
 };
 
 class InvalidMonsterName : public std::runtime_error {

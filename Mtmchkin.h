@@ -6,6 +6,7 @@
 
 #include "Cards/Card.h"
 #include "Players/Player.h"
+#include "Cards/Gang.h"
 
 class Mtmchkin{
 
@@ -56,15 +57,20 @@ public:
 private:
     std::queue<std::shared_ptr<Card>> deck;
     std::vector<std::shared_ptr<Player>> players;
+    std::vector<std::shared_ptr<Player>> wonPlayers;
+    std::vector<std::shared_ptr<Player>> lostPlayers;
     int m_numRounds;
+    static const int minDeckSize = 5;
 
     void initializeDeckList(const std::string fileName);
-    void addNewCard(const std::string cardName, std::ifstream &deckFile);
+    void addNewCard(const std::string cardName, std::ifstream &deckFile, int& lineNum);
+    static std::shared_ptr<Gang> parseGangStream(std::ifstream &deckFile, int &lineNum);
     void initializePlayerQueue();
     int getNumOfPlayers() const;
     void getPlayerNameAndClass();
     static bool isValidName(const std::string& name);
     bool didCreateClass(const std::string& playerClass, const std::string& name);
+    void updatePlayersLists(std::shared_ptr<Player>& player);
 };
 
 

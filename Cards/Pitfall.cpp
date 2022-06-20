@@ -9,10 +9,10 @@ Pitfall::Pitfall() : Card("Pitfall") {}
 
 void Pitfall::applyEncounter(Player &player) const {
     if(player.getClass() == "Rogue") {
-        printPitfallMessage(1);
+        printPitfallMessage(true);
         return;
     }
 
     player.damage(10);
-    printPitfallMessage(0);
+    printPitfallMessage(false);
 }

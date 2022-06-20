@@ -49,11 +49,11 @@ std::unique_ptr<Merchant::Action> Merchant::getUserAction() {
 
         switch (playerChoice) {
         case static_cast<int>(Merchant::ActionEnum::Nothing):
-            return std::unique_ptr<Merchant::NoAction>();
+            return std::unique_ptr<Merchant::NoAction>(new Merchant::NoAction());
         case static_cast<int>(Merchant::ActionEnum::HealthBoost):
-            return std::unique_ptr<Merchant::HealthPotion>();
+            return std::unique_ptr<Merchant::HealthPotion>(new Merchant::HealthPotion());
         case static_cast<int>(Merchant::ActionEnum::ForceBoost):
-            return std::unique_ptr<Merchant::ForceBoost>();
+            return std::unique_ptr<Merchant::ForceBoost>(new Merchant::ForceBoost());
         default:
             printInvalidInput();
             std::getline(std::cin, userInput);

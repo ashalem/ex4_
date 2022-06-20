@@ -91,6 +91,14 @@ bool Player::isKnockedOut() const {
     return this->m_HP == 0;
 }
 
+bool Player::hasWon() const {
+    return this->m_level == maxLevel;
+}
+
+bool Player::isPlaying() const {
+    return !isKnockedOut() && !hasWon();
+}
+
 void Player::addCoins(const int coinsToAdd) {
     //assert(coinsToAdd > 0);
     if (coinsToAdd <= 0) {

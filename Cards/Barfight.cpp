@@ -9,10 +9,10 @@ Barfight::Barfight() : Card("Barfight") {}
 
 void Barfight::applyEncounter(Player &player) const {
     if(player.getClass() == "Fighter") {
-        printBarfightMessage(1);
+        printBarfightMessage(true);
         return;
     }
 
     player.damage(10);
-    printBarfightMessage(0);
+    printBarfightMessage(false);
 }
