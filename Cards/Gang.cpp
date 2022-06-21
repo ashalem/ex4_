@@ -18,6 +18,7 @@ void Gang::applyEncounter(Player &player) const  {
     bool wasDefeated = false;
     for (const std::unique_ptr<BattleCard> &monster : monsters) {
         if (wasDefeated) {
+            printLossBattle(player.getName(), monster->getName());
             player.damage(monster->getDamage());
             monster->handleLoss(player);
             continue;
@@ -27,13 +28,14 @@ void Gang::applyEncounter(Player &player) const  {
             player.addCoins(monster->getLoot());
         } else {
             wasDefeated = true;
+            printLossBattle(player.getName(), monster->getName());
             player.damage(monster->getDamage());
             monster->handleLoss(player);
-            break;
         }
     }
 
     if (!wasDefeated) {
+        printWinBattle(player.getName(), getName());
         player.levelUp();
     }
 }
