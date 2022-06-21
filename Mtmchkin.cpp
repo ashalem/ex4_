@@ -83,12 +83,9 @@ void Mtmchkin::initializeDeckList(const std::string fileName) {
 }
 
 Mtmchkin::Mtmchkin(const std::string fileName) : m_numRounds(0) {
-    // Code for deck building in here!
+    printStartGameMessage();
     initializeDeckList(fileName);
     initializePlayerQueue();
-
-
-    // Code for players in here!
 }
 
 int Mtmchkin::getNumOfPlayers() const{
@@ -173,7 +170,6 @@ void Mtmchkin::getPlayerNameAndClass() {
 }
 
 void Mtmchkin::initializePlayerQueue() {
-    printStartGameMessage();
     int numPlayers = getNumOfPlayers();
     for (int i = 1; i <= numPlayers; i++) {
         getPlayerNameAndClass();
