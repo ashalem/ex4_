@@ -38,12 +38,20 @@ std::unique_ptr<Merchant::Action> Merchant::getUserAction() {
     std::string userInput;
     std::getline(std::cin, userInput);
 
+    int playerChoice;
     while (true) {
-        int playerChoice;
         try {
             playerChoice = std::stoi(userInput.c_str());
-        } catch (std::invalid_argument) {
+            //std::cout << "got player choice: " << userInput  << "translated: " << playerChoice << std::endl;
+        } catch (std::invalid_argument& e) {
+            //std::cout << "got error player choice: " << userInput << std::endl;
             printInvalidInput();
+            std::getline(std::cin, userInput);
+            continue;
+        } catch (std::out_of_range& e) {
+            //std::cout << "got error player choice: " << userInput << std::endl;
+            printInvalidInput();
+            std::getline(std::cin, userInput);
             continue;
         }
 
@@ -70,12 +78,16 @@ void Merchant::applyEncounter(Player &player) const  {
 
     if (player.pay(merchantAction->getCost())) {
         merchantAction->doBenefit(player);
+        printMerchantSummary(std::cout,
+                    player.getName(),
+                    static_cast<int>(merchantAction->getTypeEnum()), 
+                    merchantAction->getCost());
     } else {
         printMerchantInsufficientCoins(std::cout);
+        printMerchantSummary(std::cout,
+                    player.getName(),
+                    static_cast<int>(merchantAction->getTypeEnum()), 
+                    0);
     }
-    
-    printMerchantSummary(std::cout,
-                        player.getName(),
-                        static_cast<int>(merchantAction->getTypeEnum()), 
-                        merchantAction->getCost());
+
 }

@@ -11,6 +11,9 @@ tester : $(OBJS) test.o
 main_tester: $(OBJS) tool/main.o
 	$(CC) $(DEBUG_FLAG) $(CPPFLAGS) $(OBJS) tool/main.o -o $@
 
+FileTester:  $(OBJS) tool/testsMain.o
+	$(CC) $(DEBUG_FLAG) $(CPPFLAGS) $(OBJS) tool/testsMain.o -o $@
+
 
 utilities.o: utilities.cpp utilities.h Players/Player.h Exception.h
 Cards/Card.o: Cards/Card.cpp Cards/Card.h Players/Player.h utilities.h
@@ -29,6 +32,7 @@ Players/Wizard.o: Players/Wizard.cpp Players/Wizard.h Players/Player.h utilities
 Mtmchkin.o: Mtmchkin.cpp  Mtmchkin.h
 test.o: test.cpp
 tool/main.o: tool/main.cpp
+tool/testsMain.o : tool/testsMain.cpp
 
 clean:
-	rm -f test.o tool/main.o $(OBJS) $(EXEC)
+	rm -f test.o tool/testsMain.o tool/main.o $(OBJS) $(EXEC)

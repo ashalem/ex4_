@@ -89,23 +89,24 @@ Mtmchkin::Mtmchkin(const std::string fileName) : m_numRounds(0) {
 }
 
 int Mtmchkin::getNumOfPlayers() const{
-     int playerChoice, validInput = 0;
+     int playerChoice;
      std::string userInput;
-     while(!validInput) {
+     while(true) {
         printEnterTeamSizeMessage();
         std::getline(std::cin, userInput);
         try {
             playerChoice = std::stoi(userInput.c_str());
-        } catch (std::invalid_argument) {
-            //TODO //std::cout << "Invalid team input! Please enter an integer." << std::endl;
+        } catch (std::invalid_argument& e) {
+            printInvalidTeamSize();
+            continue;
+        } catch (std::out_of_range& e) {
+            printInvalidTeamSize();
             continue;
         }
         if(playerChoice >= 2 && playerChoice <= 6){
-            validInput = 1;
+            break;
         } 
-        else {
-            printInvalidTeamSize();
-        }
+        printInvalidTeamSize();
     }
     return playerChoice;
 }
@@ -145,12 +146,16 @@ bool Mtmchkin::didCreateClass(const std::string& playerClass, const std::string&
 
 void Mtmchkin::getPlayerNameAndClass() {
     bool validInput = false;
-    int firstSpace;
+    std::size_t firstSpace;
     std::string playerName, playerClass, playerInput;
     printInsertPlayerMessage();
     while(!validInput) {
         std::getline(std::cin, playerInput);
         firstSpace = playerInput.find(' ');
+        if (firstSpace == std::string::npos) {
+            printInvalidName();
+            continue;
+        }
         playerName = playerInput.substr(0, firstSpace);
         //std::cout << "received: " << playerInput << " to: " << playerName;
         if(!isValidName(playerName)){
