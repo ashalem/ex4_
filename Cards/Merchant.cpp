@@ -42,14 +42,11 @@ std::unique_ptr<Merchant::Action> Merchant::getUserAction() {
     while (true) {
         try {
             playerChoice = std::stoi(userInput.c_str());
-            //std::cout << "got player choice: " << userInput  << "translated: " << playerChoice << std::endl;
         } catch (std::invalid_argument& e) {
-            //std::cout << "got error player choice: " << userInput << std::endl;
             printInvalidInput();
             std::getline(std::cin, userInput);
             continue;
         } catch (std::out_of_range& e) {
-            //std::cout << "got error player choice: " << userInput << std::endl;
             printInvalidInput();
             std::getline(std::cin, userInput);
             continue;
