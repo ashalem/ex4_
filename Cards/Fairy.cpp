@@ -13,6 +13,6 @@ void Fairy::applyEncounter(Player &player) const  {
         return;
     }
 
-    player.heal(10);
+    player.heal(fairyHeal);
     printFairyMessage(true);
 }

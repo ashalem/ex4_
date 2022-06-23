@@ -13,6 +13,6 @@ void Barfight::applyEncounter(Player &player) const {
         return;
     }
 
-    player.damage(10);
+    player.damage(barfightDamage);
     printBarfightMessage(false);
 }

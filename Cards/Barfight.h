@@ -33,6 +33,9 @@ public:
     Barfight(const Barfight&) = default;
     virtual ~Barfight() = default;
     Barfight& operator=(const Barfight& other) = default;
+
+private:
+    static const int barfightDamage = 10;
 };
 
 

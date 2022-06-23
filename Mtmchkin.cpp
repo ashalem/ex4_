@@ -39,23 +39,23 @@ std::shared_ptr<Gang> Mtmchkin::parseGangStream(std::ifstream &deckFile, int &li
 
 void Mtmchkin::addNewCard(const std::string& cardName, std::ifstream &deckFile, int &lineNum) {
     if ("Dragon" == cardName) {
-        deck.push(std::shared_ptr<Dragon>(new Dragon()));
+        m_deck.push(std::shared_ptr<Dragon>(new Dragon()));
     } else if ("Vampire" == cardName) {
-        deck.push(std::shared_ptr<Vampire>(new Vampire()));
+        m_deck.push(std::shared_ptr<Vampire>(new Vampire()));
     } else if ("Goblin" == cardName) {
-        deck.push(std::shared_ptr<Goblin>(new Goblin()));
+        m_deck.push(std::shared_ptr<Goblin>(new Goblin()));
     } else if ("Merchant" == cardName) {
-        deck.push(std::shared_ptr<Merchant>(new Merchant()));
+        m_deck.push(std::shared_ptr<Merchant>(new Merchant()));
     } else if ("Treasure" == cardName) {
-        deck.push(std::shared_ptr<Treasure>(new Treasure()));
+        m_deck.push(std::shared_ptr<Treasure>(new Treasure()));
     } else if ("Pitfall" == cardName) {
-        deck.push(std::shared_ptr<Pitfall>(new Pitfall()));
+        m_deck.push(std::shared_ptr<Pitfall>(new Pitfall()));
     } else if ("Fairy" == cardName) {
-        deck.push(std::shared_ptr<Fairy>(new Fairy()));
+        m_deck.push(std::shared_ptr<Fairy>(new Fairy()));
     } else if ("Barfight" == cardName) {
-        deck.push(std::shared_ptr<Barfight>(new Barfight()));
+        m_deck.push(std::shared_ptr<Barfight>(new Barfight()));
     } else if ("Gang" == cardName) {
-        deck.push(parseGangStream(deckFile, lineNum));
+        m_deck.push(parseGangStream(deckFile, lineNum));
     } else {
         throw DeckFileFormatError(lineNum);
     }
@@ -74,7 +74,7 @@ void Mtmchkin::initializeDeckList(const std::string& fileName) {
         lineNum++;
     }
 
-    if (deck.size() < minDeckSize) {
+    if (m_deck.size() < minDeckSize) {
         throw DeckFileInvalidSize();
     }
 }
@@ -127,15 +127,15 @@ bool Mtmchkin::isValidName(const std::string& name) {
 bool Mtmchkin::createClass(const std::string& playerClass, const std::string& name) {
     if(playerClass == "Fighter") {
         std::shared_ptr<Fighter> fighter(new Fighter(name));
-        players.push_back(fighter);
+        m_players.push_back(fighter);
         return true;
     }else if(playerClass == "Rogue") {
         std::shared_ptr<Rogue> rogue(new Rogue(name));
-        players.push_back(rogue);
+        m_players.push_back(rogue);
         return true;
     }else if(playerClass == "Wizard") {
         std::shared_ptr<Wizard> wizard(new Wizard(name));
-        players.push_back(wizard);
+        m_players.push_back(wizard);
         return true;
     }
 
@@ -188,25 +188,25 @@ void Mtmchkin::initializePlayerQueue() {
 
 void Mtmchkin::updatePlayersLists(std::shared_ptr<Player>& player) {
     if (player->isKnockedOut()) {
-        this->lostPlayers.push_back(player);
+        this->m_lostPlayers.push_back(player);
     } else if (player->hasWon()) {
-        this->wonPlayers.push_back(player);
+        this->m_wonPlayers.push_back(player);
     }
 }
 
 void Mtmchkin::playRound() {
     this->m_numRounds++;
     printRoundStartMessage(this->m_numRounds);
-    for (std::shared_ptr<Player>& currentPlayer: players) {
+    for (std::shared_ptr<Player>& currentPlayer: m_players) {
         if(!currentPlayer->isPlaying()){
             continue;
         }
         printTurnStartMessage(currentPlayer->getName());
-        std::shared_ptr<Card> currentCard = deck.front();
+        std::shared_ptr<Card> currentCard = m_deck.front();
         currentCard->applyEncounter(*currentPlayer);
         this->updatePlayersLists(currentPlayer);
-        deck.pop();
-        deck.push(currentCard);
+        m_deck.pop();
+        m_deck.push(currentCard);
     }
     if (isGameOver()) {
         printGameEndMessage();
@@ -216,27 +216,27 @@ void Mtmchkin::playRound() {
 void Mtmchkin::printLeaderBoard() const {
     printLeaderBoardStartMessage();
     int ranking = 1;
-    for (const std::shared_ptr<Player>& wonPlayer : this->wonPlayers) {
+    for (const std::shared_ptr<Player>& wonPlayer : this->m_wonPlayers) {
         printPlayerLeaderBoard(ranking, *wonPlayer);
         ranking++;
     }
 
-    for (const std::shared_ptr<Player>& currentPlayer : this->players) {
+    for (const std::shared_ptr<Player>& currentPlayer : this->m_players) {
         if (currentPlayer->isPlaying()) {
             printPlayerLeaderBoard(ranking, *currentPlayer);
             ranking++;
         }
     }
 
-    for (std::vector<std::shared_ptr<Player>>::const_reverse_iterator lostPlayer = this->lostPlayers.rbegin();
-           lostPlayer != this->lostPlayers.rend();  ++lostPlayer) {
+    for (std::vector<std::shared_ptr<Player>>::const_reverse_iterator lostPlayer = this->m_lostPlayers.rbegin();
+           lostPlayer != this->m_lostPlayers.rend();  ++lostPlayer) {
         printPlayerLeaderBoard(ranking, *(*lostPlayer));
         ranking++;
     }
 }
 
 bool Mtmchkin::isGameOver() const {
-    return (this->wonPlayers.size() + this->lostPlayers.size()) == this->players.size();
+    return (this->m_wonPlayers.size() + this->m_lostPlayers.size()) == this->m_players.size();
 }
 
 int Mtmchkin::getNumberOfRounds() const {

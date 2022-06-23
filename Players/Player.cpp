@@ -10,7 +10,7 @@
 bool Player::isValidName(const std::string& name){
 
     int name_length = name.length();
-    if(name_length > 15){
+    if(name_length > maxNameLen){
         return 0;
     }
 

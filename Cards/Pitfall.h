@@ -33,6 +33,9 @@ public:
     Pitfall(const Pitfall&) = default;
     virtual ~Pitfall() = default;
     Pitfall& operator=(const Pitfall& other) = default;
+
+private:
+    static const int pitfallDamage = 10;
 };
 
 

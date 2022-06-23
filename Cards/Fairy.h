@@ -34,6 +34,8 @@ public:
     Fairy(const Fairy&) = default;
     virtual ~Fairy() = default;
     Fairy& operator=(const Fairy& other) = default;
+private:
+    static const int fairyHeal = 10;
 };
 
 

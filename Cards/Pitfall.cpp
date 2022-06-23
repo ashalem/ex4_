@@ -13,6 +13,6 @@ void Pitfall::applyEncounter(Player &player) const {
         return;
     }
 
-    player.damage(10);
+    player.damage(pitfallDamage);
     printPitfallMessage(false);
 }

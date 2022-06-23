@@ -55,24 +55,74 @@ public:
     int getNumberOfRounds() const;
 
 private:
-    std::queue<std::shared_ptr<Card>> deck;
-    std::vector<std::shared_ptr<Player>> players;
-    std::vector<std::shared_ptr<Player>> wonPlayers;
-    std::vector<std::shared_ptr<Player>> lostPlayers;
+    std::queue<std::shared_ptr<Card>> m_deck;
+    std::vector<std::shared_ptr<Player>> m_players;
+    std::vector<std::shared_ptr<Player>> m_wonPlayers;
+    std::vector<std::shared_ptr<Player>> m_lostPlayers;
     int m_numRounds;
     static const int minDeckSize = 5;
     static const int minPlayersNum = 2;
     static const int maxPlayersNum = 6;
 
+
     void initializeDeckList(const std::string& fileName);
     void addNewCard(const std::string& cardName, std::ifstream &deckFile, int& lineNum);
     static std::shared_ptr<Gang> parseGangStream(std::ifstream &deckFile, int &lineNum);
+
+    /*
+    * Initialize the Players in a queue of the the Mtmchkin class and gets the team size.
+    *
+    * @return
+    *      void 
+    */
     void initializePlayerQueue();
+
+    /*
+    * Gets the number of Players from the user (only number between 2-6).
+    *
+    * @return
+    *      int - the number of players in the game. 
+    */
     int getNumOfPlayers() const;
+
+    /*
+    * Gets from the user the Player's name and class (and checks if it is valid).
+    *
+    * @return
+    *      void 
+    */
     void parsePlayerDetails();
+
+    /*
+    * Checks if the inserted name is valid, accoring to the requirments.
+    *
+    * @return
+    *      bool - if the name if valid or not. 
+    */
     static bool isValidName(const std::string& name);
+
+    /*
+    * Checks the Validity of class name inserted and if so, creates a new instance of the class.
+    *
+    * @return
+    *      bool - if the class name inserted was valid and an object was created. 
+    */
     bool createClass(const std::string& playerClass, const std::string& name);
+
+    /*
+    * Checks from all players which ones won / died and puts them in the relevent list.
+    *
+    * @return
+    *      void 
+    */
     void updatePlayersLists(std::shared_ptr<Player>& player);
+
+    /*
+    * Checks the Validity of the player's name and class name inserted.
+    *
+    * @return
+    *      bool - if the names inserted are valid. 
+    */
     static bool readPlayerNameClass(std::string &playerName, std::string &playerClass);
 };
 
