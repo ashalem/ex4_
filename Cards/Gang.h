@@ -40,6 +40,7 @@ public:
     Gang& operator=(const Gang& other) = default;
 
 private:
+    void applyMonsterLoss(BattleCard &monster, Player& player) const;
     std::vector<std::unique_ptr<BattleCard>> monsters;
 };
 

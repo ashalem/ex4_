@@ -179,8 +179,7 @@ public:
     */
     int getForce() const;
 
-    
-
+    static const int maxNameLen = 15;
 private:
 
     /*

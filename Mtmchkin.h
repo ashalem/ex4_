@@ -61,16 +61,19 @@ private:
     std::vector<std::shared_ptr<Player>> lostPlayers;
     int m_numRounds;
     static const int minDeckSize = 5;
+    static const int minPlayersNum = 2;
+    static const int maxPlayersNum = 6;
 
-    void initializeDeckList(const std::string fileName);
-    void addNewCard(const std::string cardName, std::ifstream &deckFile, int& lineNum);
+    void initializeDeckList(const std::string& fileName);
+    void addNewCard(const std::string& cardName, std::ifstream &deckFile, int& lineNum);
     static std::shared_ptr<Gang> parseGangStream(std::ifstream &deckFile, int &lineNum);
     void initializePlayerQueue();
     int getNumOfPlayers() const;
-    void getPlayerNameAndClass();
+    void parsePlayerDetails();
     static bool isValidName(const std::string& name);
-    bool didCreateClass(const std::string& playerClass, const std::string& name);
+    bool createClass(const std::string& playerClass, const std::string& name);
     void updatePlayersLists(std::shared_ptr<Player>& player);
+    static bool readPlayerNameClass(std::string &playerName, std::string &playerClass);
 };
 
 

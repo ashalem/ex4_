@@ -38,7 +38,7 @@ public:
 private:
     enum class ActionEnum {Nothing = 0, HealthBoost, ForceBoost};
     class Action;
-    class NoAction;
+    class BuyNothing;
     class HealthPotion;
     class ForceBoost;
     static std::unique_ptr<Merchant::Action> getUserAction();
@@ -60,14 +60,14 @@ private:
     Merchant::ActionEnum m_typeEnum;
 };
 
-class Merchant::NoAction : public Merchant::Action {
+class Merchant::BuyNothing : public Merchant::Action {
 public:
-    NoAction();
+    BuyNothing();
     void doBenefit(Player &player) const override;
 
-    ~NoAction() = default;
-    NoAction(const NoAction&) = default;
-    NoAction& operator=(const NoAction&) = default;
+    ~BuyNothing() = default;
+    BuyNothing(const BuyNothing&) = default;
+    BuyNothing& operator=(const BuyNothing&) = default;
 };
 
 class Merchant::HealthPotion : public Merchant::Action {

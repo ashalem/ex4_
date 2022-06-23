@@ -34,17 +34,15 @@ std::shared_ptr<Gang> Mtmchkin::parseGangStream(std::ifstream &deckFile, int &li
         aGang->addMonster(monsterName);
     }
 
-    ////std::cout << "In gang error" << std::endl;
     throw DeckFileFormatError(lineNum);
 }
 
-void Mtmchkin::addNewCard(const std::string cardName, std::ifstream &deckFile, int &lineNum) {
+void Mtmchkin::addNewCard(const std::string& cardName, std::ifstream &deckFile, int &lineNum) {
     if ("Dragon" == cardName) {
         deck.push(std::shared_ptr<Dragon>(new Dragon()));
     } else if ("Vampire" == cardName) {
         deck.push(std::shared_ptr<Vampire>(new Vampire()));
     } else if ("Goblin" == cardName) {
-        ////std::cout << "gg" << std::endl;
         deck.push(std::shared_ptr<Goblin>(new Goblin()));
     } else if ("Merchant" == cardName) {
         deck.push(std::shared_ptr<Merchant>(new Merchant()));
@@ -59,12 +57,11 @@ void Mtmchkin::addNewCard(const std::string cardName, std::ifstream &deckFile, i
     } else if ("Gang" == cardName) {
         deck.push(parseGangStream(deckFile, lineNum));
     } else {
-        ////std::cout << "card name " << cardName << std::endl;
         throw DeckFileFormatError(lineNum);
     }
 }
 
-void Mtmchkin::initializeDeckList(const std::string fileName) {
+void Mtmchkin::initializeDeckList(const std::string& fileName) {
     std::ifstream deckFile(fileName);
     if (!deckFile) {
         throw DeckFileNotFound();
@@ -103,7 +100,8 @@ int Mtmchkin::getNumOfPlayers() const{
             printInvalidTeamSize();
             continue;
         }
-        if(playerChoice >= 2 && playerChoice <= 6){
+
+        if(playerChoice >= minPlayersNum && playerChoice <= maxPlayersNum){
             break;
         } 
         printInvalidTeamSize();
@@ -111,73 +109,79 @@ int Mtmchkin::getNumOfPlayers() const{
     return playerChoice;
 }
 
-bool Mtmchkin::isValidName(const std::string& name){
+bool Mtmchkin::isValidName(const std::string& name) {
 
     int name_length = name.length();
-    if(name_length > 15){
-        return 0;
+    if(name_length > Player::maxNameLen){
+        return false;
     }
 
-    for (int chr = 0; chr < name_length; chr++){
-        if(!std::isalpha(name[chr])){
-            return 0;
+    for (int i = 0; i < name_length; i++){
+        if(!std::isalpha(name[i])){
+            return false;
         }
     }
 
-    return 1;
+    return true;
 }
-bool Mtmchkin::didCreateClass(const std::string& playerClass, const std::string& name) {
+bool Mtmchkin::createClass(const std::string& playerClass, const std::string& name) {
     if(playerClass == "Fighter") {
         std::shared_ptr<Fighter> fighter(new Fighter(name));
         players.push_back(fighter);
-        return 1;
+        return true;
     }else if(playerClass == "Rogue") {
         std::shared_ptr<Rogue> rogue(new Rogue(name));
         players.push_back(rogue);
-        return 1;
+        return true;
     }else if(playerClass == "Wizard") {
         std::shared_ptr<Wizard> wizard(new Wizard(name));
         players.push_back(wizard);
-        return 1;
+        return true;
     }
 
-    return 0;
+    return false;
 }
 
-void Mtmchkin::getPlayerNameAndClass() {
-    bool validInput = false;
+bool Mtmchkin::readPlayerNameClass(std::string &playerName, std::string &playerClass) {
     std::size_t firstSpace;
-    std::string playerName, playerClass, playerInput;
+    std::string playerInput;
+    std::getline(std::cin, playerInput);
+    firstSpace = playerInput.find(' ');
+    if (firstSpace == std::string::npos) {
+        return false;
+    }
+    playerName = playerInput.substr(0, firstSpace);
+    playerClass = playerInput.substr(firstSpace + 1);
+    return true;
+}
+
+void Mtmchkin::parsePlayerDetails() {
+    std::string playerName, playerClass;
     printInsertPlayerMessage();
-    while(!validInput) {
-        std::getline(std::cin, playerInput);
-        firstSpace = playerInput.find(' ');
-        if (firstSpace == std::string::npos) {
+    while(true) {
+        if (!readPlayerNameClass(playerName, playerClass)) {
             printInvalidName();
             continue;
         }
-        playerName = playerInput.substr(0, firstSpace);
-        //std::cout << "received: " << playerInput << " to: " << playerName;
+        
         if(!isValidName(playerName)){
-            //std::cout << "invalid name" << std::endl;
             printInvalidName();
             continue;
         }
-        playerClass = playerInput.substr(firstSpace+1);
-        //std::cout << "class: " << playerClass << std::endl;
-        if(!didCreateClass(playerClass, playerName)){
-            //std::cout << "invalid class" << std::endl;
+
+        if(!createClass(playerClass, playerName)){
             printInvalidClass();
             continue;
         }
-        validInput = true;
+
+        break;
     }
 }
 
 void Mtmchkin::initializePlayerQueue() {
     int numPlayers = getNumOfPlayers();
-    for (int i = 1; i <= numPlayers; i++) {
-        getPlayerNameAndClass();
+    for (int i = 0; i < numPlayers; i++) {
+        parsePlayerDetails();
     }
 
 }
@@ -193,9 +197,7 @@ void Mtmchkin::updatePlayersLists(std::shared_ptr<Player>& player) {
 void Mtmchkin::playRound() {
     this->m_numRounds++;
     printRoundStartMessage(this->m_numRounds);
-    ////std::cout << "Players num: " << this->players.size() << "Deck size: " << this->deck.size() << std::endl;
     for (std::shared_ptr<Player>& currentPlayer: players) {
-        ////std::cout << "in player: " << currentPlayer->getName();
         if(!currentPlayer->isPlaying()){
             continue;
         }

@@ -16,9 +16,9 @@ Merchant::ActionEnum Merchant::Action::getTypeEnum() const {
     return this->m_typeEnum;
 }
 
-Merchant::NoAction::NoAction() : Merchant::Action(0, Merchant::ActionEnum::Nothing) {}
+Merchant::BuyNothing::BuyNothing() : Merchant::Action(0, Merchant::ActionEnum::Nothing) {}
 
-void Merchant::NoAction::doBenefit(Player &player) const {}
+void Merchant::BuyNothing::doBenefit(Player &player) const {}
 
 Merchant::HealthPotion::HealthPotion() : Merchant::Action(5, Merchant::ActionEnum::HealthBoost) {}
 
@@ -54,7 +54,7 @@ std::unique_ptr<Merchant::Action> Merchant::getUserAction() {
 
         switch (playerChoice) {
         case static_cast<int>(Merchant::ActionEnum::Nothing):
-            return std::unique_ptr<Merchant::NoAction>(new Merchant::NoAction());
+            return std::unique_ptr<Merchant::BuyNothing>(new Merchant::BuyNothing());
         case static_cast<int>(Merchant::ActionEnum::HealthBoost):
             return std::unique_ptr<Merchant::HealthPotion>(new Merchant::HealthPotion());
         case static_cast<int>(Merchant::ActionEnum::ForceBoost):

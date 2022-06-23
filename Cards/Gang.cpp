@@ -14,13 +14,17 @@
 
 Gang::Gang() : Card("Gang") {}
 
+void Gang::applyMonsterLoss(BattleCard &monster, Player& player) const {
+    printLossBattle(player.getName(), monster.getName());
+    player.damage(monster.getDamage());
+    monster.handleLoss(player);
+}
+
 void Gang::applyEncounter(Player &player) const  {
     bool wasDefeated = false;
     for (const std::unique_ptr<BattleCard> &monster : monsters) {
         if (wasDefeated) {
-            printLossBattle(player.getName(), monster->getName());
-            player.damage(monster->getDamage());
-            monster->handleLoss(player);
+            applyMonsterLoss(*monster, player);
             continue;
         }
 
@@ -28,9 +32,7 @@ void Gang::applyEncounter(Player &player) const  {
             player.addCoins(monster->getLoot());
         } else {
             wasDefeated = true;
-            printLossBattle(player.getName(), monster->getName());
-            player.damage(monster->getDamage());
-            monster->handleLoss(player);
+            applyMonsterLoss(*monster, player);
         }
     }
 
